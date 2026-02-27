@@ -1,12 +1,18 @@
+import java.util.Scanner;
 public class palindromecheckerapp {
-    static final String APP_NAME = "palindrome checker app";
-    static final String VERSION = "version 1.0";
-
- public static void main(String[] args){
-     System.out.println("=================================");
-     System.out.println("WELCOME TO PALINDROME CHECKER APP");
-     System.out.println(" " + VERSION);
-     System.out.println("=================================");
-     System.out.println("System initialized successfully.");
- }
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("enter a string:");
+        String word = sc.nextLine();
+        String reversed = "";
+        for(int i=word.length() - 1; i >= 0; i--){
+            reversed += word.charAt(i);
+        }
+        if(word.equals(reversed)){
+            System.out.println("The string \" " + word + "\" is a palindrome");
+        }
+        else{
+            System.out.println("The string \" " + word + "\" is not a palindrome");
+        }
+    }
 }
