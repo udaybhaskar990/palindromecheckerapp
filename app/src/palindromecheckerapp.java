@@ -1,33 +1,16 @@
-import java.util.Stack;
+ class PalindromeCheckerApp {
 
-interface PalindromeStrategy {
-    boolean checkPalindrome(String word);
-}
-
-class StackStrategy implements PalindromeStrategy {
-
-    public boolean checkPalindrome(String word) {
-
-        Stack<Character> stack = new Stack<>();
-
-        for (int i = 0; i < word.length(); i++) {
-            stack.push(word.charAt(i));
-        }
-
+    public static boolean reverseCheck(String word) {
         String reversed = "";
 
-        while (!stack.isEmpty()) {
-            reversed = reversed + stack.pop();
+        for (int i = word.length() - 1; i >= 0; i--) {
+            reversed = reversed + word.charAt(i);
         }
 
         return word.equals(reversed);
     }
-}
 
-class DequeStrategy implements PalindromeStrategy {
-
-    public boolean checkPalindrome(String word) {
-
+    public static boolean twoPointerCheck(String word) {
         int start = 0;
         int end = word.length() - 1;
 
@@ -41,22 +24,25 @@ class DequeStrategy implements PalindromeStrategy {
 
         return true;
     }
-}
-
- class PalindromeCheckerApp {
 
     public static void main(String[] args) {
 
         String word = "madam";
 
-        PalindromeStrategy strategy;
+        long startTime = System.nanoTime();
+        boolean result1 = reverseCheck(word);
+        long endTime = System.nanoTime();
+        long reverseTime = endTime - startTime;
 
-        strategy = new StackStrategy();   // choose algorithm here
+        startTime = System.nanoTime();
+        boolean result2 = twoPointerCheck(word);
+        endTime = System.nanoTime();
+        long twoPointerTime = endTime - startTime;
 
-        if (strategy.checkPalindrome(word)) {
-            System.out.println(word + " is a Palindrome");
-        } else {
-            System.out.println(word + " is not a Palindrome");
-        }
+        System.out.println("Reverse Method Result: " + result1);
+        System.out.println("Execution Time: " + reverseTime + " ns");
+
+        System.out.println("Two Pointer Method Result: " + result2);
+        System.out.println("Execution Time: " + twoPointerTime + " ns");
     }
 }
